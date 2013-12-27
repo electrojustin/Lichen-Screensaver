@@ -1,5 +1,11 @@
 XScreensaver hack based on the graphical payload of the lichen DOS virus (http://www.youtube.com/watch?v=w9JABxGCjxk)
 
+Copyright (C) 2013 Justin Green <electrojustin@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to NO CONDITIONS.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OR CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 Known issues PLEASE READ BEFORE POSTING A BUG REPORT:
 
 Bug with windowed modes in which lichen is improperly rendered at certain resolutions, mostly resolutions with a width of an odd number of pixels. This means that the XScreensaver thumbnail preview will often
