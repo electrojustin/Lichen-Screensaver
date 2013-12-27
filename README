@@ -17,7 +17,7 @@ To compile xscreensaver hack:
 To install:
 1. Obtain a copy of the lichen binary. You may need to compile the xscreensaver hack (see above), but I've included an Intel 64 bit version (will likely work on AMD 64 bit machines as well).
 2. Copy the lichen binary to the xscreensaver hacks directory. This is generally something like "/usr/lib/xscreensaver" or, if xscreensaver was installed from source, "/usr/local/libexec/xscreensaver"
-3. Add an entry for lichen to the .xscreensaver file in the home directory. The entry should looks something like:
+3. Add an entry for lichen to the .xscreensaver file in the home directory. The entry should look something like:
 "- GL:			lichen -root			\n\".
 
 Windowed Mode:
@@ -81,7 +81,7 @@ I've also tried to mark any runtime pitfalls, those are, sections of code that h
 	OpenGL or XScreensaver or maybe just my specific program makes valgrind go 
 	nuts.
 
-Feel free to email me with suggestions, bugs, and code you think should be included in the porject.
+Feel free to email me with suggestions, bugs, and code you think should be included in the project.
 
 Happy Hacking!
 
