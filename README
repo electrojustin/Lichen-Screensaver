@@ -1,7 +1,6 @@
 XScreensaver hack based on the graphical payload of the lichen DOS virus (http://www.youtube.com/watch?v=w9JABxGCjxk)
 
 Known issues PLEASE READ BEFORE POSTING A BUG REPORT:
-Cannot properly run lichen in windowed mode or lichen_windowed in fullscreen mode.
 
 Bug with windowed modes in which lichen is improperly rendered at certain resolutions, mostly resolutions with a width of an odd number of pixels. This means that the XScreensaver thumbnail preview will often
 not work. Most monitors do not have odd widths, so this shouldnt be a problem for normal fullscreen use.

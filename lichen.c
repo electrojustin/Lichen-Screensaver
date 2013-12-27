@@ -50,7 +50,7 @@ static argtype vars[] = {0}; /*Required*/
 ENTRYPOINT ModeSpecOpt cells_opts = {0, opts, 0, vars, NULL}; /*Required*/
 
 ENTRYPOINT void
-reshape_cells (ModeInfo *mi, int height, int width) /*C'mon xscreensaver... xscreensaver decided to switch height and width. Required function by XScreensaver API. Feel free to modify contents.*/
+reshape_cells (ModeInfo *mi, int width, int height) /*Required function by XScreensaver API. Feel free to modify contents.*/
 {
 
 	if (height != h || width != w) /*Resets everything on resize to avoid undefined behavior*/
@@ -112,7 +112,7 @@ ENTRYPOINT void
 init_cells (ModeInfo *mi) /*Required function by XScreensaver API. Feel free to modify contents.*/
 {
 	glx_context = init_GL (mi); /*Required*/
-	reshape_cells (mi, MI_HEIGHT(mi), MI_WIDTH(mi));	
+	reshape_cells (mi, MI_WIDTH(mi), MI_HEIGHT(mi));	
 }
 
 ENTRYPOINT void
