@@ -15,7 +15,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 			"*wireframe:	False	\n" \
 
 #define refresh_cells 0
-#define MAX_HEIGHT 4000 /*Change this if you need a resolution biggger than 4000x4000. Note: if you have multiple monitors, XScreensaver will simply spawn multiple sessions, so this need only be as large as your largest monitor.*/
+#define MAX_HEIGHT 4000 /*Change this if you need a resolution bigger than 4000x4000. Note: if you have multiple monitors, XScreensaver will simply spawn multiple sessions, so this need only be as large as your largest monitor.*/
 #define MAX_WIDTH 4000
 
 #include "xlockmore.h" /*Required*/
