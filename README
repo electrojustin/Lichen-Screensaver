@@ -27,7 +27,7 @@ To run, simply "./lichen".
 Helpful hacking hints:
 I've tried to mark all of the OpenGL and XScreensaver specific code to make it easier for anyone hacking the program. This code is marked as required, as modifying it will likely create headaches for anyone who isn't particularly knowledgeable of OpenGL or XScreensaver. These were written with much trial/error and a little copy/paste from other XScreensaver hacks ;). For anyone fairly new to OpenGL or XScreensaver or programming in general, I recommend treating anything labeled "required" and not explicitly labeled "feel free to modify contents" as black boxes.
 
-I've also tried to mark any runtime pitfalls, those are, sections of code that have caused much grief as runtime bugs and should likely not be changed. Most of these involve a "stuck cell" bugs.
+I've also tried to mark any runtime pitfalls, those are, sections of code that have caused much grief as runtime bugs and should likely not be changed. Most of these involve "stuck cell" bugs.
 
 	High level overview of what this program does:
 	This program is a cellular automata based screensaver. It obeys very 
