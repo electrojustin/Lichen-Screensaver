@@ -1,0 +1,93 @@
+XScreensaver hack based on the graphical payload of the lichen DOS virus (http://www.youtube.com/watch?v=w9JABxGCjxk)
+
+Copyright (C) 2013 Justin Green <electrojustin@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to NO CONDITIONS.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OR CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Known issues PLEASE READ BEFORE POSTING A BUG REPORT:
+
+Bug with windowed modes in which lichen is improperly rendered at certain resolutions, mostly resolutions with a width of an odd number of pixels. This means that the XScreensaver thumbnail preview will often
+not work. Most monitors do not have odd widths, so this shouldnt be a problem for normal fullscreen use.
+
+Only works with XScreensaver on linux.
+
+To compile xscreensaver hack:
+1. Obtain XScreensaver source code
+2. copy lichen.c, cell.h, and Makefile into <path to xscreensaver source>/hacks/glx
+3. cd to <path to xscreensaver source>/hacks/glx
+4. make lichen
+
+To install:
+1. Obtain a copy of the lichen binary. You may need to compile the xscreensaver hack (see above), but I've included an Intel 64 bit version (will likely work on AMD 64 bit machines as well).
+2. Copy the lichen binary to the xscreensaver hacks directory. This is generally something like "/usr/lib/xscreensaver" or, if xscreensaver was installed from source, "/usr/local/libexec/xscreensaver"
+3. Add an entry for lichen to the .xscreensaver file in the home directory. The entry should look something like:
+"- GL:			lichen -root			\n\".
+
+Windowed Mode:
+XScreensaver, when running in fullscreen mode, swaps height and width. To run lichen in windowed mode using only the binary, copy lichen_windowed.c to <path to xscreensaver source>/hacks/glx, rename the file as lichen.c, and compile normally.
+To run, simply "./lichen".
+
+Helpful hacking hints:
+I've tried to mark all of the OpenGL and XScreensaver specific code to make it easier for anyone hacking the program. This code is marked as required, as modifying it will likely create headaches for anyone who isn't particularly knowledgeable of OpenGL or XScreensaver. These were written with much trial/error and a little copy/paste from other XScreensaver hacks ;). For anyone fairly new to OpenGL or XScreensaver or programming in general, I recommend treating anything labeled "required" and not explicitly labeled "feel free to modify contents" as black boxes.
+
+I've also tried to mark any runtime pitfalls, those are, sections of code that have caused much grief as runtime bugs and should likely not be changed. Most of these involve "stuck cell" bugs.
+
+	High level overview of what this program does:
+	This program is a cellular automata based screensaver. It obeys very 
+	simple rules. Each cell is spawned with a spawn wait time. After so many 
+	cycles, when this wait time is reached, the cell is allowed to spawn new 
+	cells directly above, below, left, and right if and only if those spaces 
+	contain no living cells. Cells cannot spawn before or after the wait time, 
+	only the same cycle it is reached. Cells have a finite amount of
+	lifeforce. This lifeforce drains with each cycle, which is represented by
+	pixels growing dimmer. When a cell's lifeforce hits 0, it dies. New cells
+	are also spawned randomly throughout the world. This particular
+	implementation gives cells 3 different "lifeforces" for each of the 3
+	primary colors of light. Spawned cells retain the same type of lifeforce 
+	(color) as their parents.
+
+	Low level details of specific implementation:
+	The cell struct contains all the information needed for a cell. It 
+	contains the cell's coordinates, its spawn wait time, and a character 
+	array called "state". State's first three elements are for the cell's RGB 
+	lifeforce. State's last element indicates which lifeforce to modify (i.e. 
+	state [3] = 0 would mean a red cell, 1 means green, 2 means blue).
+
+	Anything that begins with ENTRYPOINT is automatically called by the 
+	XScreensaver API. Most of the functions are self-descriptive; draw is
+	called once to cycle through the cells and render them, init is called 
+	once at the beginning, reshape is called whenever the window size changes, 
+	and release is called at the end to free up any dynamically allocated
+	memory.
+
+	The only other detail that is crucial to know before modifying the program
+	is the implementation of the grid of cells. Not only do I have a 2D array
+	of all cells, living and dead, but I have a circular double-linked list of 
+	living cells. This way, I can run the simulation through only the living 
+	cells and save millions of processor cycles that would otherwise be used 
+	looping through the entire 1920x1080 or so array.
+
+	Compiling with xscreensaver notes:
+	All .h files required should be listed in the revelant section of the make
+	file.
+
+	Again, leaving the code sections labeled required be will likely save
+	grief at compile and run time for those new to XScreensaver.
+
+	Disclaimers:
+	This code is somewhat cobbled together. I may have broken a few rules
+	regarding the XScreensaver API, such as no global variables and no GLUT.
+	Feel free to fix these things if you must, but the program works 
+	relatively well even with these "oversights".
+
+	One final note: memory checkers will not be useful here. Something about 
+	OpenGL or XScreensaver or maybe just my specific program makes valgrind go 
+	nuts.
+
+Feel free to email me with suggestions, bugs, and code you think should be included in the project.
+
+Happy Hacking!
+
+-electrojustin
