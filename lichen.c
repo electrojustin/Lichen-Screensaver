@@ -81,7 +81,7 @@ reshape_cells (ModeInfo *mi, int width, int height) /*Required function by XScre
 	
 		if (pixels != NULL)
 			free (pixels);
-		pixels = (char*)malloc (h*w*3);
+		pixels = (char*)malloc (h*w*4);
 		for (i = 0; i < h*w*3; i++)
 			pixels [i] = 0;
 	}
@@ -91,7 +91,7 @@ reshape_cells (ModeInfo *mi, int width, int height) /*Required function by XScre
 	glViewport (0, 0, (GLint) width, (GLint) height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective (45.0, 1/h1, 1.0, 300.0);
+	/*gluPerspective (45.0, 1/h1, 1.0, 300.0);*/
 	glMatrixMode(GL_MODELVIEW);
 	glClear (GL_COLOR_BUFFER_BIT); /*...is required*/
 }
@@ -169,7 +169,7 @@ draw_cells (ModeInfo *mi) /*Required function by XScreensaver API. Feel free to 
 		}
 	}
 
-	glDrawPixels (w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels); /*Required for OpenGL pixel modification*/
+	glDrawPixels (w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels); /*Required for OpenGL pixel modification*/
 	glXSwapBuffers (dpy, window); /*Required*/
 
 	num_cells += num_cells_buf;
@@ -208,9 +208,10 @@ void remove_cell (void)
 void set_pixel(int x, int y, int r, int g, int b) /*Required function for OpenGL pixel modification*/
 {
 
-  pixels[(y*w+x)*3+0] = r;
-  pixels[(y*w+x)*3+1] = g;
-  pixels[(y*w+x)*3+2] = b;
+  pixels[(y*w+x)*4+0] = r;
+  pixels[(y*w+x)*4+1] = g;
+  pixels[(y*w+x)*4+2] = b;
+  pixels[(y*w+x)*4+3] = 255;
 
 }
 
